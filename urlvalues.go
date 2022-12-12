@@ -11,9 +11,7 @@ import (
 var ErrInvalidStruct = errors.New("urlvalues: target must be a struct pointer")
 
 // ParseError occurs when a URL value failed to be parsed into a struct
-// field's type. It exposes the field name and the key used to extract the
-// URL value. Internally, it holds the FieldError, which can be accessed
-// by unwrapping the error.
+// field's type.
 type ParseError struct {
 	// Name of struct field.
 	FieldName string
@@ -33,8 +31,7 @@ func (e *ParseError) Unwrap() error {
 }
 
 // Unmarshal unmarshals data into the value pointed to by v. If v is nil or
-// not a struct pointer, Unmarshal returns an ErrInvalidStruct error. If
-// data is nil, Unmarshal returns without updating v's fields.
+// not a struct pointer, Unmarshal returns an ErrInvalidStruct error.
 //
 // Slices are decoded by splitting URL values by a delimiter and parsing each
 // item individually. The delimiter defaults to semicolon (;), but can by
@@ -90,8 +87,8 @@ func (e *ParseError) Unwrap() error {
 //
 // Any error that occurs while processing struct fields results in a FieldError.
 // ParseError wraps around FieldError and is returned if any error occurs while
-// parsing the data that was passed into Unmarshal. ParseError is never
-// returned from errors occuring while parsing default values.
+// parsing the URL values data that was passed into Unmarshal. ParseError is
+// never returned from errors occuring while parsing default values.
 func Unmarshal(data url.Values, v any, setParseOpts ...SetParseOptionFunc) error {
 	pOpts := &ParseOptions{}
 	for _, f := range setParseOpts {
@@ -109,7 +106,6 @@ func Unmarshal(data url.Values, v any, setParseOpts ...SetParseOptionFunc) error
 	for _, field := range fields {
 		field := field
 
-		// TODO: do this after?
 		// Set any default value into the struct for this field.
 		if field.options.defaultValue != "" {
 			if err := processField(true, field.options.defaultValue, field.field, field.options, *pOpts); err != nil {

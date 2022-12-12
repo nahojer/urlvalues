@@ -9,7 +9,8 @@ import (
 	"time"
 )
 
-// FieldError occurs when a URL value failed to be decoded into a struct field.
+// FieldError occurs when an error occurs updating an individual field in the
+// provided struct value.
 type FieldError struct {
 	fieldName string
 	typeName  string
