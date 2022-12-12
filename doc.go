@@ -1,2 +1,2 @@
-// Package urlvalues unmarshals URL values as defined by net/url into struct values.
+// Package urlvalues unmarshals [url.Values] into struct values.
 package urlvalues

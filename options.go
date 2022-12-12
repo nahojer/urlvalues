@@ -1,7 +1,6 @@
 package urlvalues
 
-// SetParseOptionFunc allows for overriding parsing behaviour when unmarshalling
-// URL values.
+// SetParseOptionFunc allows for overriding the parsing behaviour of URL values.
 type SetParseOptionFunc func(*ParseOptions)
 
 // WithDelimiter returns a SetParseOptionFunc that sets the delimiter used to
@@ -13,7 +12,7 @@ func WithDelimiter(s string) SetParseOptionFunc {
 }
 
 // ParseOptions holds all the options that allows for customizing the parsing
-// behaviour when unmarshalling URL values.
+// behaviour when unmarshalling [url.Values].
 type ParseOptions struct {
 	// Delimiter used to convert slices and maps from and into their string
 	// representaton.
