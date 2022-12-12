@@ -41,27 +41,27 @@ type TestTarget struct {
 		Slice []string `urlvalue:"items"`
 	}
 	Embed
-	TextUnmarshaller   TestTextUnmarshaller   `urlvalue:",default:text"`
-	BinaryUnmarshaller TestBinaryUnmarshaller `urlvalue:",default:binary"`
+	TextUnmarshaler   TestTextUnmarshaler   `urlvalue:",default:text"`
+	BinaryUnmarshaler TestBinaryUnmarshaler `urlvalue:",default:binary"`
 }
 
 type Embed struct {
 	Byte byte
 }
 
-// TestTextUnmarshaller implements encoding.TextUnmarshaller.
-type TestTextUnmarshaller string
+// TestTextUnmarshaler implements encoding.TextUnmarshaler.
+type TestTextUnmarshaler string
 
-func (t *TestTextUnmarshaller) UnmarshalText(text []byte) error {
-	*t = TestTextUnmarshaller(fmt.Sprintf("text_%s", text))
+func (t *TestTextUnmarshaler) UnmarshalText(text []byte) error {
+	*t = TestTextUnmarshaler(fmt.Sprintf("text_%s", text))
 	return nil
 }
 
-// TestBinaryUnmarshaller implements encoding.BinaryUnmarshaller.
-type TestBinaryUnmarshaller []byte
+// TestBinaryUnmarshaler implements encoding.BinaryUnmarshaler.
+type TestBinaryUnmarshaler []byte
 
-func (b *TestBinaryUnmarshaller) UnmarshalBinary(data []byte) error {
-	*b = TestBinaryUnmarshaller([]byte(fmt.Sprintf("data_%s", data)))
+func (b *TestBinaryUnmarshaler) UnmarshalBinary(data []byte) error {
+	*b = TestBinaryUnmarshaler([]byte(fmt.Sprintf("data_%s", data)))
 	return nil
 }
 
@@ -78,7 +78,7 @@ func TestUnmarshal(t *testing.T) {
 				String: "banana", Ptr: nil, PtrDefault: ptr("orange"),
 				Uint64: 7, Int: 42, Int64: 66, Float64: 3.14159,
 				Bool: true, Time: time.Now().AddDate(-1, 2, -10), Duration: time.Second,
-				TextUnmarshaller: "text_text", BinaryUnmarshaller: []byte("data_binary"),
+				TextUnmarshaler: "text_text", BinaryUnmarshaler: []byte("data_binary"),
 			},
 		},
 		{
@@ -88,37 +88,37 @@ func TestUnmarshal(t *testing.T) {
 				String: "banana", Ptr: nil, PtrDefault: ptr("orange"),
 				Uint64: 7, Int: 42, Int64: 66, Float64: 3.14159,
 				Bool: true, Time: time.Now().AddDate(-1, 2, -10), Duration: time.Second,
-				TextUnmarshaller: "text_text", BinaryUnmarshaller: []byte("data_binary"),
+				TextUnmarshaler: "text_text", BinaryUnmarshaler: []byte("data_binary"),
 			},
 		},
 		{
 			"non-empty data",
 			map[string][]string{
-				"aString":            {"apple"},
-				"Ptr":                {"pear"},
-				"PtrDefault":         {"watermelon"},
-				"Uint":               {"1"},
-				"Uint8":              {"2"},
-				"Uint16":             {"3"},
-				"Uint32":             {"4"},
-				"aUint64":            {"5"},
-				"aInt":               {"6"},
-				"Int8":               {"7"},
-				"Int16":              {"8"},
-				"Int32":              {"9"},
-				"aInt64":             {"10"},
-				"Float32":            {"11.11"},
-				"aFloat64":           {"12.12"},
-				"aBool":              {"false"},
-				"Skip":               {"whatever"},
-				"-":                  {"not skipped"},
-				"Time":               {"now+2y"},
-				"Duration":           {"5h"},
-				"aMap":               {"key1:value1", "key2:value2"},
-				"items":              {"item1", "item2"},
-				"Byte":               {"7"},
-				"TextUnmarshaller":   {"a"},
-				"BinaryUnmarshaller": {"b"},
+				"aString":           {"apple"},
+				"Ptr":               {"pear"},
+				"PtrDefault":        {"watermelon"},
+				"Uint":              {"1"},
+				"Uint8":             {"2"},
+				"Uint16":            {"3"},
+				"Uint32":            {"4"},
+				"aUint64":           {"5"},
+				"aInt":              {"6"},
+				"Int8":              {"7"},
+				"Int16":             {"8"},
+				"Int32":             {"9"},
+				"aInt64":            {"10"},
+				"Float32":           {"11.11"},
+				"aFloat64":          {"12.12"},
+				"aBool":             {"false"},
+				"Skip":              {"whatever"},
+				"-":                 {"not skipped"},
+				"Time":              {"now+2y"},
+				"Duration":          {"5h"},
+				"aMap":              {"key1:value1", "key2:value2"},
+				"items":             {"item1", "item2"},
+				"Byte":              {"7"},
+				"TextUnmarshaler":   {"a"},
+				"BinaryUnmarshaler": {"b"},
 			},
 			TestTarget{
 				String: "apple", Ptr: ptr("pear"), PtrDefault: ptr("watermelon"),
@@ -131,8 +131,8 @@ func TestUnmarshal(t *testing.T) {
 				Anon: struct {
 					Slice []string "urlvalue:\"items\""
 				}{Slice: []string{"item1", "item2"}},
-				Embed:            Embed{Byte: 7},
-				TextUnmarshaller: "text_a", BinaryUnmarshaller: []byte("data_b"),
+				Embed:           Embed{Byte: 7},
+				TextUnmarshaler: "text_a", BinaryUnmarshaler: []byte("data_b"),
 			},
 		},
 	}

@@ -40,10 +40,10 @@ func (e *ParseError) Unwrap() error {
 // separated by a colon (:), with the key to the left and the value to the
 // right of the colon.
 //
-// Fields with types implementing [encoding.TextUnmarshaller] and/or
-// [encoding.BinaryUnmarshaller] will be decoded using those interfaces,
+// Fields with types implementing [encoding.TextUnmarshaler] and/or
+// [encoding.BinaryUnmarshaler] will be decoded using those interfaces,
 // respectively. If a type implements both interfaces, the
-// [encoding.TextUnmarshaller] interface is used to decode the value.
+// [encoding.TextUnmarshaler] interface is used to decode the value.
 //
 // The decoding of each struct field can be customized by the name string
 // stored under the "urlvalue" key in the struct field's tag. The name string
