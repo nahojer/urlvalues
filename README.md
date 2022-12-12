@@ -26,5 +26,5 @@ All of the documentation can be found on the [go.dev](https://pkg.go.dev/github.
 
 ## Credits
 
-A special thanks to [Ardan Labs](www.ardanlabs.com) whose [conf](https://github.com/ardanlabs/conf) 
+A special thanks to [Ardan Labs](https://www.ardanlabs.com) whose [conf](https://github.com/ardanlabs/conf) 
 project inspired the field extracting and processing implementation.
