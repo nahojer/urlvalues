@@ -1,6 +1,6 @@
 # urlvalues
 
-Copyright 2022, Johan Rönkkö
+Copyright 2022, 2023 Johan Rönkkö
 
 ## Licensing
 
